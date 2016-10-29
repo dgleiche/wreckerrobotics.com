@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no" />
+
+  <meta name="author" content="Dylan Gleicher" />
+
+  <title><%= @title || '577 Wreckers Robotics' %></title>
+
+  <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
+
+  <%= css :application %>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<div id="wrap">
+  <nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container">
+      <!-- mobile -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dig-navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="<%= url('/') %>"><img src="/images/wrecker_man.svg" class="home-icon" /></a>
+
+      </div>
+
+      <div class="collapse navbar-collapse" id="dig-navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li <% if @page=='about' %> class="active" <% end %>><a href="<%= url('/about') %>">About Us</a></li>
+          <li <% if @page=='sponsors' %> class="active" <% end %>><a href="<%= url('/sponsors') %>">Our Sponsors</a></li>
+          <li <% if @page=='announcements' %> class="active" <% end %>><a href="<%= url('/announcements') %>">Announcements</a></li>
+          <li <% if @page=='gallery' %> class="active" <% end %>><a href="<%= url('/media/gallery') %>">Gallery</a></li>
+          <li><a href="<%= url('http://www.gofundme.com/7df544') %>" target="_blank">Donate</a></li>
+          <li <% if @page=='auto' %> class="active" <% end %>><a href="<%= url('/auto_sim') %>">Parker's 2014 Auto Sim</a></li>
+          <li <% if @page=='contact' %> class="active" <% end %>><a href="<%= url('/contact') %>">Contact Us</a></li>
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+
+          <% if logged_in? %><li><a href="<%= url('/auth/logout') %>"><i class="fa fa-sign-out"></i> Logout of <%= user.name %></a></li>
+          <% else %><li <% if @page=='login' %> class="active" <% end %>><a href="<%= url('/auth/login') %>"><i class="fa fa-sign-in"></i> Login</a></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div id="wrapper" class="container">
+
+    <%= yield %>
+
+  </div>
+  <div id="push"></div>
+</div>
+<!-- FOOTER -->
+<div id="footer">
+  <!-- Oh well if Google can use center tags so can I! -->
+  <div class="container">
+    <table>
+      <tr>
+        <td><span class="footer-blob">&copy; <%= Time.now.year %> Dylan Gleicher. All Rights Reserved. Site by Dylan Gleicher (<a href="mailto:dgleiche@me.com">dgleiche@me.com</a>).</span></td>
+      </tr>
+      <tr>
+        <td><div class="fb-like-box" data-href="https://www.facebook.com/WreckerRobotics" data-height="1" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div></td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<%= js :application %>
+<!--[if lt IE 9]>
+<%= js :ie %>
+<![endif]-->
+
+
+
+</body>
+
+</html>

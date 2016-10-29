@@ -1,0 +1,292 @@
+@import "bootstrap";
+
+//////////////////
+//Main menu
+//////////////////
+//$nav-bg: lighten(black, 20%);
+$nav-bg: #000033;
+$nav-color: white;
+$nav-height: 60px;
+
+@mixin transition($args) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+.navbar {
+  background: $nav-bg;
+  border: none;
+  margin-bottom: 50px;
+}
+
+.navbar .nav {
+
+  .active {
+    a {
+      background: white;
+
+      &:hover {
+        background: white;
+      }
+    }
+
+  }
+
+  li {
+
+    a {
+      color: $nav-color;
+      font-size: 10px;
+
+      &:hover {
+        background: white
+      }
+    }
+  }
+
+  li.dropdown {
+
+    a {
+      &:hover {
+        background: $nav-bg;
+        color: white;
+      }
+      background: $nav-bg !important;
+    }
+
+    ul {
+      border: none;
+      background: $nav-bg;
+
+      li {
+        a {
+          &:hover {
+            background: white !important;
+            color: black;
+          }
+        }
+      }
+    }
+  }
+}
+
+.home-icon {
+  position: relative;
+  height: 70px;
+  top: -18px;
+}
+
+///////////////
+//////FOOTER
+//////////////
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+}
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  /* Negative indent footer by it's height */
+  margin: 0 auto -100px;
+}
+
+/* Set the fixed height of the footer here */
+#push,
+#footer {
+  height: 100px;
+}
+#footer {
+  //background-color: #eee;
+}
+
+/* Lastly, apply responsive CSS fixes as necessary */
+@media (max-width: 767px) {
+  #footer {
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+@media (min-width: 767px) {
+  #main_slider {
+    margin-top: 50px;
+  }
+}
+
+@media (min-width: 1300px) {
+  .navbar {
+    height: $nav-height;
+  }
+
+  .navbar .nav {
+    li {
+      height: $nav-height;
+
+      a {
+        height: $nav-height;
+        font-size: 13px;
+      }
+    }
+  }
+
+  .home-icon {
+    height: 80px;
+    top: -18px;
+  }
+}
+
+.logo-text {
+  /*font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;*/
+  font-family: Baskerville,serif;
+  color: black;
+  line-height: 1.2rem;
+  font-size: 6.65rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+//Form formatting
+form {
+  input[type='text'], input[type='email'], textarea {
+    font-size: 20px !important;
+    padding: 5px;
+  }
+
+  input[type=submit] {
+    width: 100px;
+    height: 50px;
+    background: rgb(44, 97, 166);
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+
+    &:hover {
+      background: rgb(4, 50, 104);
+    }
+  }
+}
+
+.edit-bar {
+  padding: 10px;
+  width: 100%;
+  background: beige;
+  margin: 10px auto;
+  border-radius: 5px;
+}
+
+.bio-img-preview, .bio-edit-img-preview {
+  float: left;
+  border-radius: 10px;
+  margin: 10px;
+  max-width: 300px;
+  max-height: 150px;
+}
+
+.member {
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  margin-bottom: 60px;
+
+  img {
+    @extend .bio-img-preview;
+  }
+
+  .name {
+    font-size: 30px;
+    color: rgb(4, 50, 105);
+    font-weight: 500;
+    text-align: center;
+  }
+
+  .bio {
+    margin-top: 20px;
+  }
+}
+
+.tools {
+  float: right;
+}
+
+.gallery-img {
+  width: 230px;
+  height: 230px;
+  border: 1px black solid;
+  cursor: pointer;
+  margin-top: 10px;
+
+  &:hover {
+    border: 1px solid blue;
+  }
+}
+
+.title {
+  color: rgb(4, 50, 105);
+}
+
+.album-desc {
+  font-size: 20px;
+  font-style: italic;
+  color: rgb(4, 50, 105);
+}
+
+.album {
+  margin-right: 50px;
+  display: inline-block;
+  width: 250px;
+  height: auto;
+
+  img {
+    cursor: pointer;
+    border: double black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+
+    &:hover {
+      border: double blue;
+      border-right: 1px solid blue;
+      border-bottom: 1px solid blue;
+    }
+  }
+}
+
+@media(max-width: 767px) {
+  .album {
+    width: 130px;
+    margin-right: 20px;
+  }
+
+  .gallery-img {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+.gallery-img-preview {
+  max-width: 250px;
+}
+
+.image-preview {
+  max-width: 150px;
+}
+
+.slider-edit {
+  margin-bottom: 10px;
+}
+
+.success-bar {
+  padding: 10px;
+  width: 100%;
+  background: lightgreen;
+  margin: 10px auto;
+  border-radius: 5px;
+}

@@ -1,0 +1,164 @@
+<h1>Who Are We?</h1>
+<p>
+  Team 577, Wreckers Robotics, is a completely student-run FTC team composed of Staples High School students from Westport, Connecticut.
+  The students design and build robots on their own through a collaborative process in a team member's basement.
+  The team has a strong tradition of attracting and mentoring new members each year.
+  The experienced members mentor new team members and those new members will become the next mentors, thus continuing the legacy of the team and FIRST FTC program.
+</p>
+
+<h1>What is FTC?</h1>
+
+<p>
+  FIRST is a 501(c)(3) not-for-profit organization whose goal
+  is to show children of all ages that STEM is both fun and
+  rewarding and lead to successful careers.
+</p>
+
+<% if logged_in? %>
+    <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#memberModal" class="fa fa-plus"> Add Member</a></div>
+<% end %>
+
+<h1>Our Captains</h1>
+<!-- Iterate through people looking for captains -->
+<% Member.where(:status => 0).each do |person| %>
+    <div data-status="<%= person.status %>" class="member<% if logged_in? %> member-l<% end %>" id="<%= person.id %>">
+
+      <% if logged_in? %>
+          <div class="tools">
+            <a href="#" class="fa fa-edit edit-member" data-toggle="modal" data-target="#memberEditModal"> Edit </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="fa fa-minus delete-member"> Delete</a>
+          </div>
+      <% end %>
+
+      <div class="name"><%= person.name %></div>
+      <img src="<%= person.img %>" alt="<%= person.name %>" />
+      <div class="bio">
+        <%= person.bio %>
+      </div>
+    </div>
+<% end %>
+
+<h1>The Team</h1>
+<!-- Iterate though people looking for members -->
+<% Member.where(:status => 1).each do |person| %>
+    <div data-status="<%= person.status %>" class="member<% if logged_in? %> member-l<% end %>" id="<%= person.id %>">
+
+      <% if logged_in? %>
+          <div class="tools">
+            <a href="#" class="fa fa-edit edit-member" data-toggle="modal" data-target="#memberEditModal"> Edit </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="fa fa-minus delete-member"> Delete</a>
+          </div>
+      <% end %>
+
+      <div class="name"><%= person.name %></div>
+      <img src="<%= person.img %>" alt="<%= person.name %>" />
+      <div class="bio">
+        <%= person.bio %>
+      </div>
+    </div>
+<% end %>
+
+<h1>Wrecker Robotics Alums</h1>
+<h3>Interpret Tenses Accordingly</h3>
+<!-- Iterate through people looking for alums -->
+<% Member.where(:status => 2).each do |person| %>
+    <div data-status="<%= person.status %>" class="member<% if logged_in? %> member-l<% end %>" id="<%= person.id %>">
+
+      <% if logged_in? %>
+          <div class="tools">
+            <a href="#" class="fa fa-edit edit-member" data-toggle="modal" data-target="#memberEditModal"> Edit </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="fa fa-minus delete-member"> Delete</a>
+          </div>
+      <% end %>
+
+      <div class="name"><%= person.name %></div>
+      <img src="<%= person.img %>" alt="<%= person.name %>" />
+      <div class="bio">
+        <%= person.bio %>
+      </div>
+    </div>
+<% end %>
+
+<!-- Modal for adding members -->
+<div class="modal fade" id="memberModal" tabindex="-1" role="dialog" aria-labelledby="memberModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memberModalLabel">Add Member</h4>
+      </div>
+      <div class="modal-body" id="member-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input name="name" type="text" class="form-control" id="name" placeholder="Enter the person's name">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" name="status" id="status">
+            <option>Captain</option>
+            <option>Member</option>
+            <option>Alum</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea name="bio" class="form-control" id="bio" rows="7"></textarea>
+        </div>
+
+        <div class="form-group">
+          <img src="" style="display: none" class="bio-img-preview" />
+          <input type="file" name="img" accept="image/*" value="Choose Image" style="margin-bottom: 30px" id="bio-img" />
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="add-member-btn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for editing members -->
+<div class="modal fade" id="memberEditModal" tabindex="-1" role="dialog" aria-labelledby="memberEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="memberEditModalLabel">Edit Member</h4>
+      </div>
+      <div class="modal-body" id="edit-member-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input name="name" type="text" class="form-control" id="name" placeholder="Enter the person's name">
+        </div>
+
+        <div class="form-group">
+          <label for="status">Status</label>
+          <select class="form-control" name="status" id="status">
+            <option val="0">Captain</option>
+            <option val="1">Member</option>
+            <option val="2">Alum</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="bio">Bio</label>
+          <textarea name="bioEdit" class="form-control bioEdit" id="bioEdit" rows="7"></textarea>
+        </div>
+
+        <input type="hidden" value="" id="id" name="id" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="edit-member-btn">Update</button>
+      </div>
+    </div>
+  </div>
+</div>
+

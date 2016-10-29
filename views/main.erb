@@ -1,0 +1,80 @@
+<!-- Messages -->
+<div class="col col-md-12 hidden-xs text-center">
+  <span class="logo-text">Wreckers Robotics Team 577</span>
+</div>
+<!-- Slider -->
+<% if logged_in? %>
+    <br />
+    <br />
+    <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#sliderModal" class="fa fa-pencil"> Manage Slider</a></div>
+<% end %>
+<div class="camera_wrap" id="main_slider">
+  <% Slider.order(:sort_order).each do |img| %>
+      <div data-src="<%= img.img %>"></div>
+  <% end %>
+</div>
+
+<% if logged_in? %>
+
+    <!-- Modal for managing slider -->
+    <div class="modal fade" id="sliderModal" tabindex="-1" role="dialog" aria-labelledby="sliderModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="sliderModalLabel">Manage Slider</h4>
+          </div>
+          <div class="modal-body" id="slider-form">
+
+            <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#sliderImageModal" class="fa fa-plus"> Add Image</a></div>
+
+            <!-- Loop through slider images to present editing -->
+            <% Slider.order(:sort_order).each do |img| %>
+                <div class="slider-edit" id="<%= img.id %>">
+
+                  <a href="#" class="fa fa-minus delete-slider"> Delete</a>
+
+                  <img src="<%= img.img %>" alt="Slider Image" class="image-preview" />
+
+              <span style="margin-left: 40px; margin-top: 30px">
+                <label for="sort">Sort Order: </label>
+                <input name="sort" class="sort" type="text" id="<%= img.id %>" value="<%= img.sort_order %>" size="1"/>
+              </span>
+
+                </div>
+            <% end %>
+
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="slider-btn">Update</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for adding images -->
+    <div class="modal fade" id="sliderImageModal" tabindex="-1" role="dialog" aria-labelledby="sliderImageModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="sliderImageModalLabel">Add Image to Slider</h4>
+          </div>
+          <div class="modal-body" id="slider-image-form">
+
+            <div class="form-group">
+              <input type="file" name="img" accept="image/*" value="Choose Image" style="margin-bottom: 30px" id="slider-img-up" />
+            </div>
+
+            <img src="" style="display: none" class="slider-img-preview image-preview" />
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" id="add-slider-btn">Add</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<% end %>

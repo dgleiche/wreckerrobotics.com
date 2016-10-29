@@ -1,0 +1,44 @@
+<a href="<%= url('media/gallery') %>"><i class="fa fa-arrow-left"></i> Back</a>
+
+<h1 class="title"><%= @name %></h1>
+<div class="album-desc"><%= @description %></div>
+
+<% if logged_in? %>
+    <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#galModal" class="fa fa-plus"> Add Image</a></div>
+<% end %>
+
+<% Gallery.where(:album_id => @id).reverse(:id).each do |img| %>
+    <img src="/images/s.gif" class="<%= @name.tr(' ', '-') + '_' + img.img %> gallery-img scale" alt="<%= img.description %>" />
+<% end %>
+
+<!-- Modal for adding images -->
+<div class="modal fade" id="galModal" tabindex="-1" role="dialog" aria-labelledby="galModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="galModalLabel">Add Image</h4>
+      </div>
+      <div class="modal-body" id="gallery-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input name="description" type="text" class="form-control" id="description" placeholder="Describe the image">
+        </div>
+
+        <div class="form-group">
+          <input type="file" name="img" accept="image/*" value="Choose Image" style="margin-bottom: 30px" id="gallery-img-up" />
+        </div>
+
+        <img src="" style="display: none" class="gallery-img-preview" />
+
+        <input type="hidden" value="<%= @id.to_s %>" id="id" name="id" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="add-gallery-btn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>

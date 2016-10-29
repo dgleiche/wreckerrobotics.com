@@ -1,0 +1,85 @@
+<% if logged_in? %>
+    <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#albumModal" class="fa fa-plus"> Add Album</a></div>
+<% end %>
+
+<h1>Albums</h1>
+<!-- Iterate through the albums -->
+<% Album.reverse(:id).each do |album| %>
+    <div class="album" id="<%= album.id %>">
+
+      <h2 class="title name"><%= album.name %></h2>
+
+      <div class="album-desc description"><%= album.description %></div>
+
+      <% if logged_in? %>
+          <div class="tools-left">
+            <a href="#" class="fa fa-edit edit-album" data-toggle="modal" data-target="#albumEditModal"> Edit </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="fa fa-minus delete-album"> Delete</a>
+          </div>
+      <% end %>
+
+      <a href="<%= url("/media/gallery/#{album.id}") %>"><img src="/images/no_image_available.svg" alt="Go to album" class="gallery-img" /></a>
+    </div>
+<% end %>
+
+<!-- Modal for adding albums -->
+<div class="modal fade" id="albumModal" tabindex="-1" role="dialog" aria-labelledby="albumModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="albumModalLabel">Add Album</h4>
+      </div>
+      <div class="modal-body" id="album-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input name="name" type="text" class="form-control" id="name" placeholder="Enter the album name">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input name="description" type="text" class="form-control" id="description" placeholder="Enter the album description">
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="add-album-btn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for editing albums -->
+<div class="modal fade" id="albumEditModal" tabindex="-1" role="dialog" aria-labelledby="albumEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="albumEditModalLabel">Edit Album</h4>
+      </div>
+      <div class="modal-body" id="album-edit-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input name="name" type="text" class="form-control" id="name" placeholder="Enter the album name">
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input name="description" type="text" class="form-control" id="description" placeholder="Enter the album description">
+        </div>
+
+        <input type="hidden" id="id" value="" name="id" />
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="edit-album-btn">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

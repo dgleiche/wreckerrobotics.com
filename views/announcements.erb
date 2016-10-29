@@ -1,0 +1,83 @@
+<% if logged_in? %>
+    <div class="edit-bar"><a href="#" data-toggle="modal" data-target="#announcementModal" class="fa fa-plus"> Add Post</a></div>
+<% end %>
+
+<h1>Announcements</h1>
+<!-- Iterate through the announcements -->
+<% Announcement.reverse(:id).each do |announcement| %>
+    <div class="announcement" id="<%= announcement.id %>">
+      <% if logged_in? %>
+          <div class="tools">
+            <a href="#" class="fa fa-edit edit-announcement" data-toggle="modal" data-target="#announcementEditModal"> Edit </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;<a href="#" class="fa fa-minus delete-announcement"> Delete</a>
+          </div>
+      <% end %>
+
+      <h2 class="title"><%= announcement.title %></h2>
+      <h5>Posted by <%= announcement.author %></h5>
+      <div class="post">
+        <%= announcement.text %>
+      </div>
+    </div>
+<% end %>
+
+
+<!-- Modal for adding anncments -->
+<div class="modal fade" id="announcementModal" tabindex="-1" role="dialog" aria-labelledby="announcementModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="announcementModalLabel">Add Announcement</h4>
+      </div>
+      <div class="modal-body" id="announcement-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input name="title" type="text" class="form-control" id="title" placeholder="Enter the article's title">
+        </div>
+
+        <div class="form-group">
+          <label for="post">Post</label>
+          <textarea name="post" class="form-control" id="post" rows="7"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="add-announcement-btn">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal for edditing anncments -->
+<div class="modal fade" id="announcementEditModal" tabindex="-1" role="dialog" aria-labelledby="announcementEditModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="announcementEditModalLabel">Edit Announcement</h4>
+      </div>
+      <div class="modal-body" id="announcement-edit-form">
+
+        <!-- Form Inside Modal -->
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input name="title" type="text" class="form-control" id="title" placeholder="Enter the article's title">
+        </div>
+
+        <div class="form-group">
+          <label for="post">Post</label>
+          <textarea name="postEdit" class="form-control" id="postEdit" rows="7"></textarea>
+        </div>
+
+        <input type="hidden" id="id" value="" name="id" />
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="edit-announcement-btn">Update</button>
+      </div>
+    </div>
+  </div>
+</div>

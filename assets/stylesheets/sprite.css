@@ -1,0 +1,24 @@
+/*
+
+        Creating a sprite from following images:
+        
+        assets/images/gallery/Robots/a20130414-211922.jpg (2448x3264)
+        assets/images/gallery/Robots/a20131231-203224.jpg (3264x2448)
+        assets/images/gallery/Robots/aDylanr.jpg (144x156)
+        assets/images/gallery/Robots/aIMG-2489.JPG (1080x720)
+        assets/images/gallery/Test-Comp-2/aIMAG0020.jpg (1952x3264)
+
+        Output files:
+          assets/images/gallery.png
+          assets/stylesheets/sprite.css
+
+        Output size:
+          8888x3264
+
+
+*/
+img.Robots_a20130414-211922 { width: 2448px; height: 3264px; background: url(/images/gallery.png) 0px 0px no-repeat; }
+img.Robots_a20131231-203224 { width: 3264px; height: 2448px; background: url(/images/gallery.png) -2448px -408px no-repeat; }
+img.Robots_aDylanr { width: 144px; height: 156px; background: url(/images/gallery.png) -5712px -1554px no-repeat; }
+img.Robots_aIMG-2489 { width: 1080px; height: 720px; background: url(/images/gallery.png) -5856px -1272px no-repeat; }
+img.Test-Comp-2_aIMAG0020 { width: 1952px; height: 3264px; background: url(/images/gallery.png) -6936px 0px no-repeat; }
